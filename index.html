@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JyotishGuru — Discover Your Cosmic Destiny</title>
+<meta name="description" content="Connect with India's top astrologers for personalized Vedic astrology readings, kundli making, and cosmic life guidance.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=Poppins:wght@300;400;500;600&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07050f;--bg2:#0d0920;--bg3:#130e28;
+  --cream:#f5f0e5;--cream2:#ede6d6;
+  --gold:#c9a84c;--gold2:#e8c870;--gold3:#f8e4a0;
+  --purple:#7c3caf;--purple2:#5a2880;
+  --blue:#3b5bbf;--pink:#c44b8a;
+  --text:#f0ede8;--text2:#b8b4c8;--text3:#7070a0;
+  --border:rgba(201,168,76,.18);
+  --glass:rgba(255,255,255,.04);
+  --glow-g:rgba(201,168,76,.3);--glow-p:rgba(124,60,175,.4);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;font-size:15px;line-height:1.6;overflow-x:hidden;cursor:none}
+a{text-decoration:none;color:inherit}
+button{cursor:none;font-family:'Poppins',sans-serif}
+input,select{font-family:'Poppins',sans-serif}
+img{display:block;max-width:100%}
+
+/* ── KEYFRAMES ── */
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes floatR{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-8px) rotate(5deg)}}
+@keyframes rotS{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes rotR{from{transform:rotate(360deg)}to{transform:rotate(0)}}
+@keyframes twinkle{0%,100%{opacity:.15}50%{opacity:1}}
+@keyframes shimmer{0%{background-position:-300% center}100%{background-position:300% center}}
+@keyframes pulseG{0%,100%{box-shadow:0 0 0 0 var(--glow-g),0 0 20px var(--glow-g)}50%{box-shadow:0 0 0 8px transparent,0 0 50px var(--glow-g)}}
+@keyframes pulseP{0%,100%{box-shadow:0 0 20px var(--glow-p)}50%{box-shadow:0 0 60px var(--glow-p),0 0 100px var(--glow-p)}}
+@keyframes slideUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes marqueeAnim{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes borderRun{0%{background-position:0% 50%}100%{background-position:400% 50%}}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes rippleWave{0%{transform:scale(0);opacity:.7}100%{transform:scale(4);opacity:0}}
+@keyframes loaderSpin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes particleFly{0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(var(--px),var(--py)) scale(0);opacity:0}}
+@keyframes glowBorder{0%,100%{border-color:rgba(201,168,76,.25)}50%{border-color:rgba(201,168,76,.7)}}
+@keyframes cardShine{0%{left:-100%}100%{left:200%}}
+@keyframes orbitRing{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes typewriter{from{width:0}to{width:100%}}
+@keyframes blinkCursor{50%{border-color:transparent}}
+@keyframes aurora{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@keyframes drawLine{from{stroke-dashoffset:200}to{stroke-dashoffset:0}}
+@keyframes energyFlow{0%{stroke-dashoffset:100}100%{stroke-dashoffset:0}}
+@keyframes countPop{0%{transform:scale(0.8);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes ringPulse{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.08);opacity:1}}
+
+/* ── LOADER ── */
+#loader{
+  position:fixed;inset:0;z-index:9999;
+  background:var(--bg);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;
+  transition:opacity .6s,pointer-events .6s;
+}
+#loader.gone{opacity:0;pointer-events:none}
+.loader-wheel{width:130px;height:130px;animation:loaderSpin 3s linear infinite}
+.loader-text{
+  font-family:'Cinzel Decorative',serif;font-size:11px;letter-spacing:4px;text-transform:uppercase;
+  color:var(--gold);animation:twinkle 1.5s ease-in-out infinite;
+}
+.loader-bar-wrap{width:200px;height:2px;background:rgba(201,168,76,.15);border-radius:2px;overflow:hidden}
+.loader-bar{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold3));width:0;border-radius:2px;transition:width .05s linear}
+
+/* ── PROGRESS BAR ── */
+#pbar{position:fixed;top:0;left:0;z-index:9995;height:3px;width:0%;background:linear-gradient(90deg,var(--pink),var(--purple),var(--gold));box-shadow:0 0 8px var(--purple);transition:width .1s linear}
+
+/* ── CURSOR ── */
+#cursor{
+  position:fixed;pointer-events:none;z-index:9998;
+  width:16px;height:16px;margin:-8px;
+  background:var(--gold);border-radius:50%;
+  box-shadow:0 0 10px var(--gold),0 0 22px rgba(201,168,76,.4);
+  transition:transform .1s,width .2s,height .2s,margin .2s,background .2s;
+  mix-blend-mode:screen;
+}
+#cursor.big{width:38px;height:38px;margin:-19px;background:rgba(201,168,76,.25);border:1px solid var(--gold)}
+.cpar{
+  position:fixed;pointer-events:none;z-index:9997;
+  border-radius:50%;animation:particleFly .8s ease-out forwards;
+}
+
+/* ── OFFER BANNER ── */
+#obanner{
+  background:linear-gradient(90deg,#180d00,#2a1800,#180d00);
+  border-bottom:1px solid rgba(201,168,76,.2);
+  padding:9px 20px;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  position:relative;z-index:100;font-size:13px;color:var(--gold2);
+  font-weight:500;
+}
+#obanner .oclose{
+  position:absolute;right:16px;background:none;border:none;color:var(--text3);
+  font-size:18px;line-height:1;transition:color .2s;padding:0;
+}
+#obanner .oclose:hover{color:var(--gold)}
+
+/* ── NAV ── */
+#nav{
+  position:sticky;top:0;z-index:90;
+  display:flex;align-items:center;padding:16px 52px;
+  background:rgba(7,5,15,.5);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,.05);
+  transition:padding .3s,background .3s,border-color .3s;
+  gap:0;
+}
+#nav.scrolled{padding:11px 52px;background:rgba(7,5,15,.92);border-bottom-color:var(--border)}
+.nlogo{
+  font-family:'Cinzel Decorative',serif;font-size:19px;font-weight:700;
+  color:var(--gold);text-shadow:0 0 24px rgba(201,168,76,.5);
+  margin-right:auto;display:flex;align-items:center;gap:8px;letter-spacing:.5px;
+}
+.nlinks{display:flex;align-items:center;gap:30px;margin:0 28px}
+.nlinks a{font-size:13px;font-weight:500;color:var(--text2);position:relative;transition:color .3s;padding:4px 0}
+.nlinks a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1.5px;background:var(--gold);transition:width .3s}
+.nlinks a:hover{color:var(--gold)}
+.nlinks a:hover::after{width:100%}
+.ncta{
+  background:linear-gradient(135deg,var(--gold),#d06010);
+  border:none;color:#fff;padding:10px 22px;border-radius:24px;
+  font-size:13px;font-weight:600;letter-spacing:.3px;
+  animation:pulseG 3s ease-in-out infinite;
+  transition:transform .2s,box-shadow .2s;
+}
+.ncta:hover{transform:scale(1.05);box-shadow:0 0 30px rgba(201,168,76,.5)}
+.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:4px}
+.hbg span{display:block;width:24px;height:2px;background:var(--text);border-radius:2px;transition:.3s}
+
+/* ── HERO ── */
+#hero{position:relative;min-height:100vh;display:flex;flex-direction:column;overflow:hidden}
+#sfx{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.hneb{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:1}
+.hn1{width:550px;height:550px;background:radial-gradient(circle,rgba(124,60,175,.22),transparent);top:-80px;right:80px;animation:float 9s ease-in-out infinite}
+.hn2{width:400px;height:400px;background:radial-gradient(circle,rgba(59,91,191,.15),transparent);bottom:60px;left:180px;animation:float 12s ease-in-out infinite reverse}
+.hn3{width:300px;height:300px;background:radial-gradient(circle,rgba(196,75,138,.1),transparent);top:40%;left:40%;animation:float 7s ease-in-out infinite 1s}
+.hero-inner{
+  position:relative;z-index:2;
+  display:grid;grid-template-columns:1fr 1fr;align-items:center;
+  max-width:1320px;margin:0 auto;padding:90px 52px 60px;
+  min-height:100vh;gap:60px;
+}
+.hl{display:flex;flex-direction:column;gap:26px}
+.hbadge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.28);
+  color:var(--gold2);font-size:11px;font-weight:600;
+  padding:7px 18px;border-radius:20px;letter-spacing:2px;text-transform:uppercase;
+  width:fit-content;
+  animation:slideUp .6s ease .3s both;
+}
+.hh1{font-family:'Playfair Display',serif;font-size:clamp(40px,5vw,70px);font-weight:900;line-height:1.07;color:var(--text)}
+.hh1 .gold{
+  background:linear-gradient(135deg,var(--gold),var(--gold3),#e07030,var(--gold));
+  background-size:300%;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  animation:shimmer 5s linear infinite;
+}
+.hword{display:inline-block}
+.hsub{font-size:15px;color:var(--text2);line-height:1.75;max-width:470px}
+.hbtns{display:flex;gap:16px;flex-wrap:wrap}
+.btn-p{
+  background:linear-gradient(135deg,var(--gold),#c07010);
+  color:#fff;font-weight:600;font-size:14px;
+  padding:14px 28px;border-radius:5px;border:none;
+  display:inline-flex;align-items:center;gap:9px;
+  box-shadow:0 4px 24px rgba(201,168,76,.35);
+  transition:transform .2s,box-shadow .2s;
+}
+.btn-p:hover{transform:scale(1.06) translateY(-2px);box-shadow:0 8px 40px rgba(201,168,76,.55)}
+.btn-o{
+  background:transparent;color:var(--text);font-size:14px;font-weight:500;
+  padding:13px 26px;border-radius:5px;
+  border:1px solid rgba(255,255,255,.22);
+  display:inline-flex;align-items:center;gap:9px;
+  transition:all .3s;animation:glowBorder 3s ease-in-out infinite;
+  position:relative;overflow:hidden;
+}
+.btn-o::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,168,76,.08),transparent);opacity:0;transition:opacity .3s}
+.btn-o:hover{border-color:var(--gold);color:var(--gold)}
+.btn-o:hover::before{opacity:1}
+.htrust{display:flex;gap:20px;flex-wrap:wrap}
+.ti{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--text3)}
+.ti-icon{width:34px;height:34px;border-radius:50%;border:1px solid rgba(201,168,76,.2);display:flex;align-items:center;justify-content:center;font-size:15px;background:rgba(201,168,76,.05)}
+.ti-v strong{display:block;color:var(--text);font-size:13px;font-weight:600}
+
+/* Hero right — zodiac wheel */
+.hr{position:relative;display:flex;align-items:center;justify-content:center}
+.zw-wrap{position:relative;width:min(500px,88vw);aspect-ratio:1}
+.zw-svg{width:100%;height:100%;animation:rotS 60s linear infinite;filter:drop-shadow(0 0 35px rgba(124,60,175,.4))}
+.zw-center{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.zw-orb{
+  width:110px;height:110px;border-radius:50%;
+  background:radial-gradient(circle at 38% 32%,rgba(201,168,76,.35),rgba(124,60,175,.45),rgba(7,5,15,.9));
+  box-shadow:0 0 50px rgba(124,60,175,.6),0 0 100px rgba(201,168,76,.12),inset 0 0 30px rgba(255,255,255,.06);
+  animation:pulseP 4s ease-in-out infinite;
+  display:flex;align-items:center;justify-content:center;
+  font-size:34px;font-family:serif;color:var(--gold);
+}
+.fz{position:absolute;font-size:18px;color:rgba(201,168,76,.55);animation:floatR 4s ease-in-out infinite}
+.scroll-ind{
+  position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;z-index:2;
+  opacity:0;animation:fadeIn .6s 2.4s both;
+}
+.smouse{width:22px;height:34px;border:2px solid rgba(201,168,76,.35);border-radius:12px;display:flex;justify-content:center;padding-top:6px}
+.sdot{width:3px;height:7px;background:var(--gold);border-radius:2px;animation:bounce 1.5s ease-in-out infinite}
+.stxt{font-size:10px;color:var(--text3);letter-spacing:2.5px;text-transform:uppercase}
+
+/* ── MARQUEE ── */
+.mqwrap{
+  background:linear-gradient(90deg,#160c00,#261400,#160c00);
+  border-top:1px solid rgba(201,168,76,.12);
+  border-bottom:1px solid rgba(201,168,76,.12);
+  padding:12px 0;overflow:hidden;
+}
+.mqtrack{display:flex;white-space:nowrap;animation:marqueeAnim 28s linear infinite}
+.mqwrap:hover .mqtrack{animation-play-state:paused}
+.mqi{padding:0 36px;font-size:13px;color:var(--gold2);font-weight:500;display:inline-flex;align-items:center;gap:10px}
+.mqdot{width:5px;height:5px;border-radius:50%;background:var(--gold);display:inline-block;box-shadow:0 0 6px var(--gold)}
+
+/* ── SECTIONS ── */
+.sec{padding:90px 52px;max-width:1320px;margin:0 auto}
+.secf{padding:90px 52px}
+.shead{text-align:center;margin-bottom:58px}
+.slabel{font-size:11px;font-weight:600;letter-spacing:3.5px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:12px}
+.stitle{font-family:'Playfair Display',serif;font-size:clamp(28px,3.5vw,44px);font-weight:700;line-height:1.2;color:var(--text)}
+.stitle .gold{color:var(--gold)}
+.ssub{font-size:14px;color:var(--text2);margin-top:12px}
+.sdiv{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:14px}
+.sdiv-line{width:70px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.sdiv-star{color:var(--gold);font-size:12px}
+
+/* ── SCROLL REVEAL ── */
+.rv{opacity:0;transform:translateY(38px)}
+.rv.fl{transform:translateX(-50px)}
+.rv.fr{transform:translateX(50px)}
+.rv.vis{opacity:1;transform:none;transition:opacity .7s ease,transform .7s ease}
+
+/* ── CATEGORIES (cream section) ── */
+.cat-sec{background:var(--cream);padding:72px 52px}
+.cat-sec .slabel{color:#7a5810}
+.cat-sec .stitle{color:#1a1000}
+.cat-sec .sdiv-line{background:linear-gradient(90deg,transparent,#c9a84c,transparent)}
+.cat-sec .sdiv-star{color:#c9a84c}
+.catg{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;max-width:900px;margin:0 auto}
+.cati{
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  padding:20px 22px;border-radius:10px;background:#fff;
+  border:1.5px solid rgba(201,168,76,.2);min-width:105px;
+  transition:transform .25s,box-shadow .25s,border-color .25s;cursor:pointer;
+}
+.cati:hover{transform:translateY(-5px);box-shadow:0 10px 30px rgba(201,168,76,.2);border-color:var(--gold)}
+.caticon{
+  width:54px;height:54px;border-radius:50%;
+  border:2px solid rgba(201,168,76,.25);
+  display:flex;align-items:center;justify-content:center;font-size:22px;
+  background:linear-gradient(135deg,#fff8e8,#fff);
+}
+.catlabel{font-size:12px;color:#3a2800;font-weight:500}
+
+/* ── SERVICE CARDS ── */
+.sg{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.scard{
+  background:var(--glass);border:1px solid rgba(255,255,255,.07);
+  border-radius:14px;padding:32px 26px;
+  display:flex;flex-direction:column;gap:14px;
+  transition:transform .35s,border-color .35s,box-shadow .35s;
+  position:relative;overflow:hidden;cursor:pointer;
+}
+.scard::before{content:'';position:absolute;top:-50%;right:-50%;width:200%;height:200%;background:radial-gradient(circle at top right,var(--ca,rgba(201,168,76,.07)),transparent 55%);opacity:0;transition:opacity .4s}
+.scard::after{content:'';position:absolute;top:0;left:-100%;width:40%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.04),transparent);animation:none;transition:.3s}
+.scard:hover{transform:translateY(-12px);border-color:var(--cab,rgba(201,168,76,.4));box-shadow:0 24px 70px var(--cas,rgba(201,168,76,.15))}
+.scard:hover::before{opacity:1}
+.scard:hover::after{left:200%;transition:left .6s}
+.sicon{font-size:36px;animation:float 3.5s ease-in-out infinite;width:64px;height:64px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.04);border-radius:14px}
+.scard:hover .sicon{animation-duration:1.5s}
+.stit{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:var(--text)}
+.sdesc{font-size:13px;color:var(--text2);line-height:1.65}
+.slink{font-size:13px;color:var(--gold);font-weight:500;display:inline-flex;align-items:center;gap:6px;margin-top:auto;transition:gap .2s}
+.scard:hover .slink{gap:12px}
+
+/* ── ZODIAC CAROUSEL ── */
+.zodiac-sec{background:var(--bg2)}
+.zt{display:flex;gap:20px;overflow:hidden;padding:8px 4px 16px;transition:transform .5s cubic-bezier(.4,0,.2,1)}
+.zc{flex:0 0 calc(100%/6 - 17px);perspective:700px;cursor:pointer}
+.zci{position:relative;width:100%;padding-bottom:130%;transform-style:preserve-3d;transition:transform .65s ease}
+.zc:hover .zci,.zc.flipped .zci{transform:rotateY(180deg)}
+.zface{position:absolute;inset:0;backface-visibility:hidden;background:var(--glass);border:1px solid rgba(255,255,255,.07);border-radius:13px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:14px}
+.zface.back{transform:rotateY(180deg);background:linear-gradient(135deg,rgba(124,60,175,.18),rgba(7,5,15,.96));border-color:rgba(201,168,76,.3);justify-content:flex-start;gap:7px;padding:16px 12px}
+.zc.zact .zface.front{border-color:var(--gold);box-shadow:0 0 24px rgba(201,168,76,.35)}
+.zsym{font-size:30px}
+.zname{font-size:12px;font-weight:700;color:var(--text)}
+.zdates{font-size:10px;color:var(--text3)}
+.zbt{font-size:11px;font-weight:700;color:var(--gold)}
+.zbtext{font-size:10px;color:var(--text2);line-height:1.45;text-align:center}
+.zbars{display:flex;gap:4px;margin-top:6px;width:100%}
+.zbar{height:3px;border-radius:2px}
+.cdots{display:flex;gap:6px;justify-content:center;margin-top:20px}
+.cdot{width:6px;height:6px;border-radius:50%;background:var(--text3);transition:background .3s,width .3s;border:none}
+.cdot.ca{background:var(--gold);width:22px;border-radius:4px}
+.carrows{display:flex;gap:10px;justify-content:center;margin-top:14px}
+.carrow{width:42px;height:42px;border-radius:50%;background:var(--glass);border:1px solid rgba(255,255,255,.1);color:var(--text2);font-size:18px;display:flex;align-items:center;justify-content:center;transition:all .25s}
+.carrow:hover{background:var(--gold);color:#fff;border-color:var(--gold);box-shadow:0 0 16px rgba(201,168,76,.4)}
+
+/* ── ASTROLOGERS ── */
+.ag{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
+.acard{
+  background:var(--glass);border:1px solid rgba(255,255,255,.07);
+  border-radius:14px;padding:26px 20px;
+  display:flex;flex-direction:column;gap:11px;align-items:center;text-align:center;
+  position:relative;overflow:hidden;
+  transition:transform .3s,border-color .35s,box-shadow .35s;
+}
+.acard:hover{transform:translateY(-10px);border-color:rgba(201,168,76,.4);box-shadow:0 20px 60px rgba(201,168,76,.13)}
+.abadge{position:absolute;top:13px;left:13px;font-size:10px;font-weight:700;padding:3px 9px;border-radius:10px}
+.aavwrap{position:relative}
+.aav{
+  width:76px;height:76px;border-radius:50%;border:2.5px solid var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  font-size:28px;background:linear-gradient(135deg,var(--bg3),var(--bg2));
+  box-shadow:0 0 0 5px rgba(201,168,76,.1);transition:box-shadow .3s;
+}
+.acard:hover .aav{box-shadow:0 0 0 5px rgba(201,168,76,.28)}
+.aonline{position:absolute;bottom:4px;right:4px;width:13px;height:13px;border-radius:50%;background:#3adb3a;border:2.5px solid var(--bg);box-shadow:0 0 8px #3adb3a;animation:pulseP 2s ease-in-out infinite}
+.aname{font-family:'Playfair Display',serif;font-size:16px;font-weight:700}
+.atags{display:flex;gap:5px;flex-wrap:wrap;justify-content:center}
+.atag{font-size:10px;padding:2px 8px;border-radius:10px;background:rgba(124,60,175,.15);color:#a070e0;border:1px solid rgba(124,60,175,.3)}
+.astars{color:var(--gold);font-size:13px;letter-spacing:2px}
+.ainfo{font-size:12px;color:var(--text3)}
+.aprice{font-size:14px;font-weight:600}
+.aprice .old{text-decoration:line-through;color:var(--text3);font-size:12px;margin-right:4px}
+.afree{background:rgba(50,200,100,.15);color:#4ae080;font-size:10px;font-weight:700;padding:3px 10px;border-radius:10px;border:1px solid rgba(50,200,100,.3);animation:bounce 2s ease-in-out infinite;display:inline-block}
+.abtns{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%}
+.abtn{padding:8px 0;border-radius:5px;font-size:12px;font-weight:600;border:1px solid rgba(201,168,76,.3);color:var(--gold);background:rgba(201,168,76,.06);transition:all .2s}
+.abtn:hover{background:var(--gold);color:#fff;border-color:var(--gold);box-shadow:0 4px 16px rgba(201,168,76,.3)}
+.abtn.call{border-color:rgba(124,60,175,.3);color:var(--purple2);background:rgba(124,60,175,.06)}
+.abtn.call:hover{background:var(--purple);color:#fff;border-color:var(--purple)}
+
+/* ── HOW IT WORKS ── */
+.how-sec{background:var(--bg2)}
+.steps{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:start;gap:0;max-width:960px;margin:0 auto}
+.step{display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;padding:0 20px}
+.snum{font-family:'Playfair Display',serif;font-size:58px;font-weight:900;line-height:1;-webkit-text-stroke:2px var(--gold);color:transparent;opacity:.35}
+.siw{width:76px;height:76px;border-radius:50%;background:rgba(124,60,175,.1);border:2px solid rgba(124,60,175,.3);display:flex;align-items:center;justify-content:center;font-size:30px;animation:float 3s ease-in-out infinite;transition:border-color .3s,transform .3s}
+.step:hover .siw{border-color:var(--gold);transform:scale(1.1)}
+.sttl{font-size:15px;font-weight:600;color:var(--text)}
+.stdesc{font-size:13px;color:var(--text2)}
+.sconn{align-self:center;padding-top:26px}
+.sconn svg{width:80px;height:24px}
+.sconn path{stroke-dasharray:200;stroke-dashoffset:200;transition:stroke-dashoffset 1s ease}
+.sconn.vis path{stroke-dashoffset:0}
+
+/* ── KUNDLI FORM ── */
+.kundli-sec{
+  background:linear-gradient(135deg,#0d0822,#180a30,#0a0d22);
+  padding:90px 52px;position:relative;overflow:hidden;
+}
+.kundli-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(124,60,175,.15),transparent 55%),radial-gradient(ellipse at 70% 50%,rgba(59,91,191,.1),transparent 55%)}
+.ki{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative;z-index:1}
+.kw{display:flex;align-items:center;justify-content:center}
+.ksvg{width:min(340px,88%);filter:drop-shadow(0 0 35px rgba(124,60,175,.45));animation:rotS 25s linear infinite}
+.kf{display:flex;flex-direction:column;gap:22px}
+.fg{position:relative}
+.flabel{position:absolute;top:14px;left:14px;font-size:13px;color:var(--text3);transition:all .2s;pointer-events:none;z-index:1}
+.finput{
+  width:100%;padding:22px 14px 8px;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+  border-radius:7px;color:var(--text);font-size:14px;
+  outline:none;transition:border-color .3s,box-shadow .3s;
+  -webkit-appearance:none;appearance:none;
+}
+.finput:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,60,175,.15)}
+.finput:focus+.flabel,.finput:not(:placeholder-shown)+.flabel{top:6px;font-size:10px;color:var(--purple2);letter-spacing:.5px}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.bgen{
+  background:linear-gradient(135deg,var(--gold),#c06010);
+  color:#fff;font-size:15px;font-weight:600;
+  padding:17px;border-radius:7px;border:none;width:100%;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  transition:transform .2s,box-shadow .2s;
+  box-shadow:0 4px 28px rgba(201,168,76,.32);
+}
+.bgen:hover{transform:translateY(-3px);box-shadow:0 10px 40px rgba(201,168,76,.5)}
+.ftrust{font-size:12px;color:var(--text3);display:flex;align-items:center;gap:8px;justify-content:center}
+
+/* ── TESTIMONIALS ── */
+.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.tc{
+  background:var(--glass);border:1px solid rgba(255,255,255,.07);
+  border-radius:14px;padding:30px 26px;
+  display:flex;flex-direction:column;gap:16px;
+  transition:transform .3s,border-color .3s;
+}
+.tc:hover{transform:translateY(-7px);border-color:rgba(201,168,76,.22)}
+.tq{font-size:44px;color:var(--gold);opacity:.28;line-height:1;font-family:serif;margin-bottom:-8px}
+.ttxt{font-size:13.5px;color:var(--text2);line-height:1.75;font-style:italic}
+.tstars{color:var(--gold);font-size:13px;letter-spacing:2px}
+.tauth{display:flex;align-items:center;gap:13px}
+.tav{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;color:#fff}
+.tname{font-size:13px;font-weight:600}
+.tloc{font-size:11px;color:var(--text3)}
+.tver{font-size:10px;color:#4ae080;display:flex;align-items:center;gap:4px}
+
+/* ── BLOG ── */
+.bgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.bcard{
+  background:var(--glass);border:1px solid rgba(255,255,255,.07);
+  border-radius:14px;overflow:hidden;
+  transition:transform .3s,box-shadow .3s;cursor:pointer;
+}
+.bcard:hover{transform:translateY(-8px);box-shadow:0 20px 50px rgba(0,0,0,.4)}
+.bimg{
+  height:160px;display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;font-size:40px;
+  transition:transform .4s;
+}
+.bcard:hover .bimg{transform:scale(1.06)}
+.btag{position:absolute;bottom:10px;left:12px;font-size:10px;font-weight:700;padding:3px 10px;border-radius:10px;letter-spacing:.5px;text-transform:uppercase}
+.binfo{padding:20px 20px 22px;display:flex;flex-direction:column;gap:10px}
+.btitle{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--text);line-height:1.35}
+.bexc{font-size:13px;color:var(--text2);line-height:1.6}
+.bmore{font-size:13px;color:var(--gold);font-weight:500;display:inline-flex;align-items:center;gap:6px;transition:gap .2s}
+.bcard:hover .bmore{gap:10px}
+.bdate{font-size:11px;color:var(--text3)}
+
+/* ── STATS ── */
+.stats-sec{
+  position:relative;padding:90px 52px;overflow:hidden;
+  background:linear-gradient(135deg,#060314,#0e0828,#060314);
+}
+.stats-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 20% 50%,rgba(124,60,175,.18),transparent 55%),radial-gradient(ellipse at 80% 50%,rgba(59,91,191,.12),transparent 55%)}
+.sgrid{max-width:1050px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);position:relative;z-index:2}
+.sstat{display:flex;flex-direction:column;align-items:center;gap:7px;padding:30px 20px;border-right:1px solid rgba(255,255,255,.06)}
+.sstat:last-child{border-right:none}
+.sstatnum{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(34px,4vw,54px);font-weight:900;line-height:1;
+  background:linear-gradient(135deg,var(--gold),var(--gold3));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 24px rgba(201,168,76,.45));
+}
+.sstatlbl{font-size:13px;color:var(--text2)}
+.sstaticon{font-size:22px;margin-bottom:4px}
+
+/* ── APP SECTION ── */
+.app-sec{background:var(--bg3);padding:90px 52px}
+.app-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.app-phone{display:flex;align-items:center;justify-content:center;position:relative}
+.phone-wrap{
+  width:240px;background:linear-gradient(135deg,#1a1030,#0d0820);
+  border:3px solid rgba(201,168,76,.3);border-radius:36px;
+  padding:12px;
+  box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 40px rgba(124,60,175,.25);
+  animation:float 5s ease-in-out infinite;
+  transform:perspective(800px) rotateY(-8deg) rotateX(4deg);
+}
+.phone-screen{
+  background:linear-gradient(180deg,var(--bg2),var(--bg));
+  border-radius:28px;overflow:hidden;padding:20px 16px;
+  display:flex;flex-direction:column;gap:12px;min-height:380px;
+}
+.ps-head{display:flex;align-items:center;gap:8px;font-family:'Cinzel Decorative',serif;font-size:12px;color:var(--gold)}
+.ps-card{background:var(--glass);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:12px;font-size:11px;display:flex;flex-direction:column;gap:6px}
+.ps-lbl{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:1px}
+.ps-av{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--gold));display:flex;align-items:center;justify-content:center;font-size:14px}
+.notif{
+  position:absolute;top:60px;right:-40px;
+  background:rgba(10,8,20,.95);border:1px solid rgba(201,168,76,.3);
+  border-radius:10px;padding:8px 12px;font-size:10px;
+  box-shadow:0 8px 24px rgba(0,0,0,.5);
+  animation:bounce 3s ease-in-out infinite;white-space:nowrap;
+}
+.notif2{
+  top:auto;bottom:100px;right:-50px;
+  animation:bounce 3s ease-in-out infinite 1.5s;
+}
+.app-right{display:flex;flex-direction:column;gap:28px}
+.app-feat{display:flex;flex-direction:column;gap:14px}
+.af{display:flex;align-items:flex-start;gap:14px;font-size:14px;color:var(--text2);opacity:0;transform:translateX(30px);transition:opacity .5s,transform .5s}
+.af.vis{opacity:1;transform:none}
+.af-check{width:24px;height:24px;border-radius:50%;background:rgba(74,224,128,.15);border:1px solid rgba(74,224,128,.3);color:#4ae080;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;margin-top:2px}
+.app-btns{display:flex;gap:14px;flex-wrap:wrap}
+.abstore{
+  display:flex;align-items:center;gap:10px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+  border-radius:10px;padding:10px 18px;
+  transition:all .25s;
+}
+.abstore:hover{background:rgba(201,168,76,.1);border-color:rgba(201,168,76,.4);transform:translateY(-3px)}
+.abstore-icon{font-size:22px}
+.abstore-txt{display:flex;flex-direction:column}
+.abstore-sub{font-size:9px;color:var(--text3)}
+.abstore-name{font-size:14px;font-weight:600}
+
+/* ── FOOTER ── */
+#footer{background:#04030a;padding:70px 52px 0;border-top:1px solid rgba(255,255,255,.05);position:relative;overflow:hidden}
+.fstars{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.fi{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr 2fr;gap:50px;padding-bottom:50px;border-bottom:1px solid rgba(255,255,255,.05)}
+.flogo{font-family:'Cinzel Decorative',serif;font-size:17px;color:var(--gold);margin-bottom:14px;display:block}
+.fdesc{font-size:13px;color:var(--text3);line-height:1.72;margin-bottom:16px}
+.socials{display:flex;gap:10px}
+.soci{width:35px;height:35px;border-radius:7px;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .22s}
+.soci:hover{border-color:var(--gold);background:rgba(201,168,76,.12);transform:translateY(-3px);box-shadow:0 5px 14px rgba(201,168,76,.2)}
+.fh{font-size:13px;font-weight:600;color:var(--text);margin-bottom:16px;letter-spacing:.5px}
+.flinks{display:flex;flex-direction:column;gap:9px}
+.flinks a{font-size:13px;color:var(--text3);transition:color .2s}
+.flinks a:hover{color:var(--gold)}
+.nlinput{display:flex;gap:8px}
+.nlemail{
+  flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+  border-radius:5px;padding:10px 14px;color:var(--text);font-size:13px;outline:none;
+  transition:border-color .3s;
+}
+.nlemail:focus{border-color:var(--gold)}
+.nlbtn{background:var(--gold);color:#fff;border:none;border-radius:5px;padding:10px 16px;font-size:13px;font-weight:600;transition:all .2s}
+.nlbtn:hover{background:var(--gold2);transform:scale(1.05)}
+.fbot{max-width:1320px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:20px 0}
+.fcopy{font-size:12px;color:var(--text3)}
+.pays{display:flex;gap:8px}
+.pay{background:rgba(255,255,255,.06);border-radius:4px;padding:4px 9px;font-size:10px;color:var(--text3);border:1px solid rgba(255,255,255,.08)}
+
+/* ── FLOATING ── */
+#fcta{position:fixed;bottom:28px;right:22px;z-index:80;display:flex;flex-direction:column;gap:10px;align-items:flex-end}
+.wabtn{width:46px;height:46px;border-radius:50%;background:#25d366;border:none;display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 4px 20px rgba(37,211,102,.45);animation:bounce 2.5s ease-in-out infinite;transition:transform .2s}
+.wabtn:hover{transform:scale(1.12)}
+.talkbtn{background:linear-gradient(135deg,var(--gold),#c06010);color:#fff;border:none;border-radius:24px;padding:12px 20px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px;box-shadow:0 4px 24px rgba(201,168,76,.4);animation:pulseG 3s ease-in-out infinite;transition:transform .2s}
+.talkbtn:hover{transform:scale(1.06)}
+#btop{position:fixed;bottom:28px;left:22px;z-index:80;width:46px;height:46px;border-radius:50%;background:var(--glass);border:1px solid rgba(255,255,255,.12);color:var(--text);font-size:20px;display:none;align-items:center;justify-content:center;transition:all .22s;backdrop-filter:blur(10px)}
+#btop.show{display:flex}
+#btop:hover{background:var(--gold);border-color:var(--gold);color:#fff}
+.ripple-el{position:fixed;pointer-events:none;z-index:9990;border-radius:50%;border:1.5px solid rgba(201,168,76,.45);animation:rippleWave 1.2s ease-out forwards;width:50px;height:50px;margin:-25px}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1100px){
+  .hero-inner{grid-template-columns:1fr;gap:50px;padding:70px 36px 50px}
+  .hr{display:none}
+  .sg{grid-template-columns:repeat(2,1fr)}
+  .ag{grid-template-columns:repeat(2,1fr)}
+  .tgrid{grid-template-columns:repeat(2,1fr)}
+  .bgrid{grid-template-columns:repeat(2,1fr)}
+  .sgrid{grid-template-columns:repeat(2,1fr)}
+  .fi{grid-template-columns:1fr 1fr;gap:32px}
+  .steps{grid-template-columns:1fr;gap:30px}
+  .sconn{display:none}
+  .ki{grid-template-columns:1fr;gap:40px}
+  .kw{display:none}
+  .app-inner{grid-template-columns:1fr}
+  .app-phone{display:none}
+  .sec,.secf,.cat-sec,.kundli-sec,.app-sec{padding:70px 36px}
+  .stats-sec{padding:70px 36px}
+}
+@media(max-width:768px){
+  .nlinks,.ncta{display:none}
+  .hbg{display:flex}
+  .sg{grid-template-columns:1fr}
+  .ag{grid-template-columns:1fr}
+  .tgrid{grid-template-columns:1fr}
+  .bgrid{grid-template-columns:1fr}
+  .sgrid{grid-template-columns:repeat(2,1fr)}
+  .fi{grid-template-columns:1fr}
+  .zc{flex:0 0 calc(100%/3 - 14px)}
+  .sec,.secf,.cat-sec,.kundli-sec,.app-sec,.stats-sec{padding:50px 20px}
+  #nav{padding:12px 20px}
+  .hero-inner{padding:60px 20px 50px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <svg class="loader-wheel" viewBox="0 0 130 130" id="lwsvg"></svg>
+  <p class="loader-text">Loading Your Destiny…</p>
+  <div class="loader-bar-wrap"><div class="loader-bar" id="lbar"></div></div>
+</div>
+
+<!-- PROGRESS -->
+<div id="pbar"></div>
+<!-- CURSOR -->
+<div id="cursor"></div>
+
+<!-- OFFER BANNER -->
+<div id="obanner">
+  <span>🌟 First Consultation FREE — Connect with Expert Astrologers Today!</span>
+  <button class="oclose" onclick="closeBanner()">✕</button>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nlogo">✦ JyotishGuru</div>
+  <div class="nlinks">
+    <a href="#hero">Home</a>
+    <a href="#services">Services</a>
+    <a href="#zodiac">Horoscope</a>
+    <a href="#astrologers">Astrologers</a>
+    <a href="#kundli">Free Kundli</a>
+    <a href="#blog">Blog</a>
+  </div>
+  <button class="ncta magnetic" onclick="scrollTo2('astrologers')">Talk to Astrologer ✦</button>
+  <button class="hbg" id="hbg" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <canvas id="sfx"></canvas>
+  <div class="hneb hn1"></div>
+  <div class="hneb hn2"></div>
+  <div class="hneb hn3"></div>
+  <div class="hero-inner">
+    <div class="hl">
+      <span class="hbadge">✧ Align Your Energy · Discover Your Path</span>
+      <h1 class="hh1">
+        <span class="hword">Discover</span><br>
+        <span class="gold hword">Divine Guidance</span><br>
+        <span class="hword">&amp; Cosmic Destiny</span>
+      </h1>
+      <p class="hsub">Connect with India's most trusted Vedic astrologers for personalized kundli readings, compatibility matching, and transformative life guidance rooted in ancient wisdom.</p>
+      <div class="hbtns">
+        <button class="btn-p magnetic" onclick="scrollTo2('astrologers')">🔮 Chat with Astrologer</button>
+        <button class="btn-o magnetic" onclick="scrollTo2('kundli')">📜 Free Kundli →</button>
+      </div>
+      <div class="htrust">
+        <div class="ti"><div class="ti-icon">⭐</div><div class="ti-v"><strong>4.9 Rating</strong><span>50M+ Reviews</span></div></div>
+        <div class="ti"><div class="ti-icon">👥</div><div class="ti-v"><strong>50M+ Users</strong><span>Worldwide</span></div></div>
+        <div class="ti"><div class="ti-icon">🔮</div><div class="ti-v"><strong>10K+ Experts</strong><span>Verified</span></div></div>
+      </div>
+    </div>
+    <div class="hr">
+      <div class="zw-wrap">
+        <svg class="zw-svg" viewBox="0 0 500 500" id="zwsvg" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="rg1" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="rgba(201,168,76,.14)"/>
+              <stop offset="100%" stop-color="rgba(7,5,15,0)"/>
+            </radialGradient>
+            <filter id="gf">
+              <feGaussianBlur stdDeviation="2.5" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <circle cx="250" cy="250" r="245" fill="url(#rg1)"/>
+          <circle cx="250" cy="250" r="235" stroke="rgba(201,168,76,.08)" stroke-width="1" fill="none"/>
+          <circle cx="250" cy="250" r="222" stroke="rgba(201,168,76,.28)" stroke-width="1.5" fill="none" filter="url(#gf)"/>
+          <circle cx="250" cy="250" r="172" stroke="rgba(201,168,76,.12)" stroke-width="1" fill="none"/>
+          <circle cx="250" cy="250" r="132" stroke="rgba(124,60,175,.22)" stroke-width="1" fill="none"/>
+        </svg>
+        <div class="zw-center">
+          <div class="zw-orb">✦</div>
+        </div>
+        <div class="fz" style="top:4%;left:12%;animation-delay:0s">♈</div>
+        <div class="fz" style="top:18%;right:4%;animation-delay:.5s">♌</div>
+        <div class="fz" style="bottom:14%;left:4%;animation-delay:1s">♎</div>
+        <div class="fz" style="bottom:4%;right:14%;animation-delay:1.5s">♑</div>
+        <div class="fz" style="top:50%;left:-1%;animation-delay:.8s">♋</div>
+        <div class="fz" style="top:50%;right:-1%;animation-delay:1.3s">♓</div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-ind">
+    <div class="smouse"><div class="sdot"></div></div>
+    <span class="stxt">Scroll to Explore</span>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="mqwrap">
+  <div class="mqtrack">
+    <span class="mqi"><span class="mqdot"></span>🟢 Live: 2,847 consultations happening now</span>
+    <span class="mqi"><span class="mqdot"></span>⭐ 15,000+ happy customers today</span>
+    <span class="mqi"><span class="mqdot"></span>🔮 First consultation FREE for new users</span>
+    <span class="mqi"><span class="mqdot"></span>🌙 Vedic · Tarot · Numerology · Vastu</span>
+    <span class="mqi"><span class="mqdot"></span>✨ 100M+ consultations completed</span>
+    <span class="mqi"><span class="mqdot"></span>🏆 India's #1 Astrology Platform</span>
+    <span class="mqi"><span class="mqdot"></span>🟢 Live: 2,847 consultations happening now</span>
+    <span class="mqi"><span class="mqdot"></span>⭐ 15,000+ happy customers today</span>
+    <span class="mqi"><span class="mqdot"></span>🔮 First consultation FREE for new users</span>
+    <span class="mqi"><span class="mqdot"></span>🌙 Vedic · Tarot · Numerology · Vastu</span>
+    <span class="mqi"><span class="mqdot"></span>✨ 100M+ consultations completed</span>
+    <span class="mqi"><span class="mqdot"></span>🏆 India's #1 Astrology Platform</span>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<div class="cat-sec">
+  <div style="max-width:1320px;margin:0 auto">
+    <div class="shead rv">
+      <span class="slabel">Shop by Category</span>
+      <h2 class="stitle">Everything for Your <span class="gold">Cosmic Journey</span></h2>
+      <div class="sdiv"><div class="sdiv-line"></div><span class="sdiv-star">✦</span><div class="sdiv-line"></div></div>
+    </div>
+    <div class="catg rv">
+      <div class="cati magnetic"><div class="caticon">📿</div><span class="catlabel">Bracelets</span></div>
+      <div class="cati magnetic"><div class="caticon">🔱</div><span class="catlabel">Yantras</span></div>
+      <div class="cati magnetic"><div class="caticon">💎</div><span class="catlabel">Crystals &amp; Stones</span></div>
+      <div class="cati magnetic"><div class="caticon">🪔</div><span class="catlabel">Puja Essentials</span></div>
+      <div class="cati magnetic"><div class="caticon">📚</div><span class="catlabel">Astro Books</span></div>
+      <div class="cati magnetic"><div class="caticon">🎁</div><span class="catlabel">Gift Combos</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services" style="background:var(--bg)">
+  <div class="sec">
+    <div class="shead rv">
+      <span class="slabel">What We Offer</span>
+      <h2 class="stitle">Our <span class="gold">Cosmic Services</span></h2>
+      <div class="sdiv"><div class="sdiv-line"></div><span class="sdiv-star">✦</span><div class="sdiv-line"></div></div>
+      <p class="ssub">Unlock the universe's wisdom through our curated celestial services</p>
+    </div>
+    <div class="sg">
+      <div class="scard rv magnetic" style="--ca:rgba(201,168,76,.09);--cab:rgba(201,168,76,.4);--cas:rgba(201,168,76,.16)">
+        <div class="sicon">💬</div>
+        <div class="stit">Talk to Astrologer</div>
+        <div class="sdesc">Connect instantly via phone or chat with India's most trusted Vedic astrology experts for real-time guidance.</div>
+        <a class="slink" href="#">Explore <span>→</span></a>
+      </div>
+      <div class="scard rv magnetic" style="--ca:rgba(124,60,175,.09);--cab:rgba(124,60,175,.4);--cas:rgba(124,60,175,.16);transition-delay:.12s">
+        <div class="sicon">📜</div>
+        <div class="stit">Free Kundli</div>
+        <div class="sdesc">Generate your complete Vedic birth chart with detailed planetary positions, dashas, and life predictions.</div>
+        <a class="slink" href="#">Explore <span>→</span></a>
+      </div>
+      <div class="scard rv magnetic" style="--ca:rgba(196,75,138,.09);--cab:rgba(196,75,138,.4);--cas:rgba(196,75,138,.16);transition-delay:.24s">
+        <div class="sicon">💑</div>
+        <div class="stit">Kundli Matching</div>
+        <div class="sdesc">Discover cosmic compatibility through Ashtakoot matching, Gun Milan, and planetary compatibility analysis.</div>
+        <a class="slink" href="#">Explore <span>→</span></a>
+      </div>
+      <div class="scard rv magnetic" style="--ca:rgba(59,91,191,.09);--cab:rgba(59,91,191,.4);--cas:rgba(59,91,191,.16);transition-delay:.12s">
+        <div class="sicon">🔮</div>
+        <div class="stit">Daily Horoscope</div>
+        <div class="sdesc">Receive AI-powered personalized daily, weekly, and monthly predictions for your zodiac sign.</div>
+        <a class="slink" href="#">Explore <span>→</span></a>
+      </div>
+      <div class="scard rv magnetic" style="--ca:rgba(201,168,76,.09);--cab:rgba(201,168,76,.4);--cas:rgba(201,168,76,.16);transition-delay:.24s">
+        <div class="sicon">🃏</div>
+        <div class="stit">Tarot Reading</div>
+        <div class="sdesc">Uncover hidden truths and future pathways through ancient tarot card wisdom and intuitive readings.</div>
+        <a class="slink" href="#">Explore <span>→</span></a>
+      </div>
+      <div class="scard rv magnetic" style="--ca:rgba(124,60,175,.09);--cab:rgba(124,60,175,.4);--cas:rgba(124,60,175,.16);transition-delay:.36s">
+        <div class="sicon">💎</div>
+        <div class="stit">AstroShop</div>
+        <div class="sdesc">Handpicked gemstones, rudraksha beads, crystals and sacred items energized by expert astrologers.</div>
+        <a class="slink" href="#">Explore <span>→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ZODIAC CAROUSEL -->
+<section id="zodiac" class="zodiac-sec">
+  <div class="sec">
+    <div class="shead rv">
+      <span class="slabel">Your Star Sign</span>
+      <h2 class="stitle">What's Your <span class="gold">Sign?</span></h2>
+      <div class="sdiv"><div class="sdiv-line"></div><span class="sdiv-star">✧</span><div class="sdiv-line"></div></div>
+      <p class="ssub">Hover to flip and reveal today's cosmic message for your sign</p>
+    </div>
+    <div>
+      <div class="zt rv" id="ztrak"></div>
+      <div class="carrows">
+        <button class="carrow" id="zprev" aria-label="Previous">‹</button>
+        <button class="carrow" id="znext" aria-label="Next">›</button>
+      </div>
+      <div class="cdots" id="zdots"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ASTROLOGERS -->
+<section id="astrologers" style="background:var(--bg)">
+  <div class="sec">
+    <div class="shead rv">
+      <span class="slabel">Meet the Experts</span>
+      <h2 class="stitle">Top <span class="gold">Astrologers</span></h2>
+      <div class="sdiv"><div class="sdiv-line"></div><span class="sdiv-star">✦</span><div class="sdiv-line"></div></div>
+      <p class="ssub">Verified professionals with years of cosmic wisdom at your service</p>
+    </div>
+    <div class="ag">
+      <div class="acard rv fl">
+        <div class="abadge" style="background:rgba(255,100,0,.14);color:#ff8040;border:1px solid rgba(255,100,0,.3)">🔥 Top Rated</div>
+        <div class="aavwrap"><div class="aav" style="background:linear-gradient(135deg,#3a0870,#c9a84c)">🙏</div><div class="aonline"></div></div>
+        <div class="aname">Pandit Rajesh Kumar</div>
+        <div class="atags"><span class="atag">Vedic</span><span class="atag">Kundli</span><span class="atag">Vastu</span></div>
+        <div class="astars">★★★★★</div>
+        <div class="ainfo">15+ Years · Hindi, English</div>
+        <div class="aprice"><span class="old">₹30/min</span> ₹15/min</div>
+        <span class="afree">FREE First Chat</span>
+        <div class="abtns"><button class="abtn">💬 Chat</button><button class="abtn call">📞 Call</button></div>
+      </div>
+      <div class="acard rv">
+        <div class="abadge" style="background:rgba(0,160,255,.14);color:#40bbff;border:1px solid rgba(0,160,255,.3)">⚡ Quick Response</div>
+        <div class="aavwrap"><div class="aav" style="background:linear-gradient(135deg,#0a2060,#c44b8a)">🌙</div><div class="aonline"></div></div>
+        <div class="aname">Ananya Sharma</div>
+        <div class="atags"><span class="atag">Tarot</span><span class="atag">Numerology</span></div>
+        <div class="astars">★★★★★</div>
+        <div class="ainfo">12+ Years · Hindi, Marathi, English</div>
+        <div class="aprice"><span class="old">₹25/min</span> ₹12/min</div>
+        <span class="afree">FREE First Chat</span>
+        <div class="abtns"><button class="abtn">💬 Chat</button><button class="abtn call">📞 Call</button></div>
+      </div>
+      <div class="acard rv fr">
+        <div class="aavwrap"><div class="aav" style="background:linear-gradient(135deg,#183060,#7c3caf)">⭐</div><div class="aonline"></div></div>
+        <div class="aname">Dr. Ramesh Jyotishi</div>
+        <div class="atags"><span class="atag">Vedic</span><span class="atag">Gemology</span><span class="atag">Puja</span></div>
+        <div class="astars">★★★★☆</div>
+        <div class="ainfo">20+ Years · Hindi, Telugu, Tamil</div>
+        <div class="aprice"><span class="old">₹40/min</span> ₹18/min</div>
+        <span class="afree">FREE First Chat</span>
+        <div class="abtns"><button class="abtn">💬 Chat</button><button class="abtn call">📞 Call</button></div>
+      </div>
+      <div class="acard rv fr">
+        <div class="abadge" style="background:rgba(201,168,76,.14);color:var(--gold);border:1px solid rgba(201,168,76,.3)">🔥 Trending</div>
+        <div class="aavwrap"><div class="aav" style="background:linear-gradient(135deg,#2a0060,#e0a030)">🌟</div><div class="aonline"></div></div>
+        <div class="aname">Priya Nakshatri</div>
+        <div class="atags"><span class="atag">Tarot</span><span class="atag">Astrology</span><span class="atag">Healing</span></div>
+        <div class="astars">★★★★★</div>
+        <div class="ainfo">8+ Years · Hindi, English, Bengali</div>
+        <div class="aprice"><span class="old">₹20/min</span> ₹10/min</div>
+        <span class="afree">FREE First Chat</span>
+        <div class="abtns"><button class="abtn">💬 Chat</button><button class="abtn call">📞 Call</button></div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:42px">
+      <button class="btn-o magnetic" style="margin:0 auto;display:inline-flex">View All Astrologers →</button>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-sec">
+  <div class="sec">
+    <div class="shead rv">
+      <span class="slabel">Simple Process</span>
+      <h2 class="stitle">How It <span class="gold">Works</span></h2>
+      <div class="sdiv"><div class="sdiv-line"></div><span class="sdiv-star">✦</span><div class="sdiv-line"></div></div>
+    </div>
+    <div class="steps">
+      <div class="step rv fl">
+        <div class="snum">01</div>
+        <div class="siw">🔍</div>
+        <div class="sttl">Choose Your Astrologer</div>
+        <div class="stdesc">Browse verified experts by specialty, rating, and language preference</div>
+      </div>
+      <div class="sconn rv"><svg viewBox="0 0 80 24"><path d="M0 12 Q40 3 80 12" stroke="rgba(201,168,76,.4)" stroke-width="1.5" fill="none" stroke-dasharray="200"/></svg></div>
+      <div class="step rv">
+        <div class="snum">02</div>
+        <div class="siw" style="animation-delay:.5s">💬</div>
+        <div class="sttl">Ask Your Question</div>
+        <div class="stdesc">Chat or call — share what's on your heart and mind openly</div>
+      </div>
+      <div class="sconn rv"><svg viewBox="0 0 80 24"><path d="M0 12 Q40 3 80 12" stroke="rgba(201,168,76,.4)" stroke-width="1.5" fill="none" stroke-dasharray="200"/></svg></div>
+      <div class="step rv fr">
+        <div class="snum">03</div>
+        <div class="siw" style="animation-delay:1s">✨</div>
+        <div class="sttl">Get Your Answers</div>
+        <div class="stdesc">Receive personalized cosmic guidance and transformative life insights</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KUNDLI FORM -->
+<section id="kundli" class="kundli-sec">
+  <div class="ki">
+    <div class="kw rv fl">
+      <svg class="ksvg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="kg1" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="rgba(124,60,175,.35)"/>
+            <stop offset="100%" stop-color="rgba(7,5,15,.05)"/>
+          </radialGradient>
+        </defs>
+        <circle cx="150" cy="150" r="142" stroke="rgba(201,168,76,.28)" stroke-width="1.5" fill="url(#kg1)"/>
+        <circle cx="150" cy="150" r="108" stroke="rgba(201,168,76,.14)" stroke-width="1" fill="none"/>
+        <circle cx="150" cy="150" r="72" stroke="rgba(124,60,175,.3)" stroke-width="1" fill="none"/>
+        <path d="M150 8 L292 150 L150 292 L8 150 Z" stroke="rgba(201,168,76,.22)" stroke-width="1" fill="none"/>
+        <path d="M150 8 L150 292 M8 150 L292 150" stroke="rgba(201,168,76,.12)" stroke-width=".5" fill="none"/>
+        <path d="M150 8 L8 150 M150 8 L292 150 M150 292 L8 150 M150 292 L292 150" stroke="rgba(201,168,76,.08)" stroke-width=".5" fill="none"/>
+        <text x="150" y="44" text-anchor="middle" fill="rgba(201,168,76,.65)" font-size="15">♈</text>
+        <text x="225" y="78" text-anchor="middle" fill="rgba(201,168,76,.65)" font-size="15">♉</text>
+        <text x="260" y="155" text-anchor="middle" fill="rgba(201,168,76,.65)" font-size="15">♊</text>
+        <text x="225" y="232" text-anchor="middle" fill="rgba(201,168,76,.65)" font-size="15">♋</text>
+        <text x="150" y="268" text-anchor="middle" fill="rgba(201,168,76,.65)" font-size="15">♌</text>
+        <text x="75" y="232" text-anchor="middle" fill="rgba(201,168,76,.65)" font-size="15">♍</text>
+        <text x="40" y="155" text-anchor="middle" fill="rgba(201,168,76,.65)" font-size="15">♎</text>
+        <text x="75" y="78" text-anchor="middle" fill="rgba(201,168,76,.65)" font-size="15">♏</text>
+        <text x="150" y="120" text-anchor="middle" fill="rgba(232,200,112,.8)" font-size="12">☉ ♃</text>
+        <text x="192" y="150" text-anchor="middle" fill="rgba(180,150,220,.8)" font-size="12">☿ ♀</text>
+        <text x="150" y="184" text-anchor="middle" fill="rgba(150,180,255,.8)" font-size="12">☽ ♂</text>
+        <text x="108" y="150" text-anchor="middle" fill="rgba(232,200,112,.8)" font-size="12">♄ ♆</text>
+        <circle cx="150" cy="150" r="22" fill="rgba(201,168,76,.1)" stroke="rgba(201,168,76,.35)" stroke-width="1"/>
+        <text x="150" y="156" text-anchor="middle" fill="rgba(201,168,76,.9)" font-size="18">✦</text>
+      </svg>
+    </div>
+    <div class="kf rv fr">
+      <div>
+        <span class="slabel">Free Cosmic Report</span>
+        <h2 class="stitle">Generate Your <span class="gold">Free Kundli</span></h2>
+        <p class="ssub" style="margin-top:10px">Unlock the secrets of your birth chart — completely free, in minutes</p>
+      </div>
+      <div class="fgrid">
+        <div class="fg" style="grid-column:1/-1">
+          <input class="finput" id="kn" type="text" placeholder=" ">
+          <label class="flabel" for="kn">Full Name</label>
+        </div>
+        <div class="fg">
+          <input class="finput" id="kd" type="date" placeholder=" ">
+          <label class="flabel" for="kd">Date of Birth</label>
+        </div>
+        <div class="fg">
+          <input class="finput" id="kt" type="time" placeholder=" ">
+          <label class="flabel" for="kt">Time of Birth</label>
+        </div>
+        <div class="fg" style="grid-column:1/-1">
+          <input class="finput" id="kp" type="text" placeholder=" ">
+          <label class="flabel" for="kp">Place of Birth</label>
+        </div>
+      </div>
+      <button class="bgen magnetic">✨ Generate Kundli</button>
+      <div class="ftrust">🔒 100% Private &amp; Secure — Your data is never shared</div>
+    </div>
+  </div>
+</section>
+
+<!-- APP SECTION -->
+<section class="app-sec">
+  <div class="app-inner">
+    <div class="app-phone rv fl">
+      <div style="position:relative">
+        <div class="phone-wrap">
+          <div class="phone-screen">
+            <div class="ps-head">✦ JyotishGuru</div>
+            <div class="ps-card">
+              <div class="ps-lbl">Live Astrologers</div>
+              <div style="display:flex;align-items:center;gap:8px">
+                <div class="ps-av">🙏</div>
+                <div>
+                  <div style="font-size:11px;font-weight:600">Pandit Rajesh</div>
+                  <div style="font-size:9px;color:var(--text3)">Vedic · ★★★★★</div>
+                </div>
+                <div style="margin-left:auto;font-size:9px;color:#4ae080;background:rgba(74,224,128,.12);padding:3px 8px;border-radius:8px;border:1px solid rgba(74,224,128,.25)">Online</div>
+              </div>
+            </div>
+            <div class="ps-card">
+              <div class="ps-lbl">Today's Horoscope</div>
+              <div style="font-size:10px;color:var(--text2)">♌ Leo — Bold new beginnings await. Trust your cosmic instincts…</div>
+              <div style="display:flex;gap:6px;margin-top:4px">
+                <div style="flex:1;background:rgba(196,75,138,.2);height:3px;border-radius:2px"></div>
+                <div style="flex:1;background:rgba(59,91,191,.2);height:3px;border-radius:2px"></div>
+                <div style="flex:1;background:rgba(74,224,128,.2);height:3px;border-radius:2px"></div>
+              </div>
+            </div>
+            <div class="ps-card">
+              <div class="ps-lbl">Free Kundli</div>
+              <div style="text-align:center;font-size:9px;color:var(--gold);font-weight:600;padding:4px">Generate Now →</div>
+            </div>
+          </div>
+        </div>
+        <div class="notif">🔔 New chat request!</div>
+        <div class="notif notif2">⭐ Rating: 4.9 · ₹15/min</div>
+      </div>
+    </div>
+    <div class="app-right rv fr">
+      <div>
+        <span class="slabel">Download Our App</span>
+        <h2 class="stitle">Take Cosmic Wisdom <span class="gold">Everywhere</span></h2>
+        <p class="ssub" style="margin-top:10px">Your personal astrologer is always one tap away — anytime, anywhere</p>
+      </div>
+      <div class="app-feat">
+        <div class="af" data-i="0"><div class="af-check">✓</div><div><strong style="color:var(--text)">First chat FREE</strong> — No charges for first consultation</div></div>
+        <div class="af" data-i="1"><div class="af-check">✓</div><div><strong style="color:var(--text)">Daily horoscope notifications</strong> — Personalized to your sign</div></div>
+        <div class="af" data-i="2"><div class="af-check">✓</div><div><strong style="color:var(--text)">Live astrologer availability</strong> — 6AM to 11PM daily</div></div>
+        <div class="af" data-i="3"><div class="af-check">✓</div><div><strong style="color:var(--text)">Kundli &amp; matching reports</strong> — Detailed PDF reports</div></div>
+      </div>
+      <div class="app-btns">
+        <a href="#" class="abstore magnetic">
+          <div class="abstore-icon">🍎</div>
+          <div class="abstore-txt"><span class="abstore-sub">Download on the</span><span class="abstore-name">App Store</span></div>
+        </a>
+        <a href="#" class="abstore magnetic">
+          <div class="abstore-icon">▶</div>
+          <div class="abstore-txt"><span class="abstore-sub">Get it on</span><span class="abstore-name">Google Play</span></div>
+        </a>
+      </div>
+      <div style="font-size:13px;color:var(--text3)">📲 10M+ Downloads &nbsp;·&nbsp; ⭐ 4.9 App Store Rating</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" style="background:var(--bg3)">
+  <div class="sec">
+    <div class="shead rv">
+      <span class="slabel">Customer Love</span>
+      <h2 class="stitle">What Our <span class="gold">Users Say</span></h2>
+      <div class="sdiv"><div class="sdiv-line"></div><span class="sdiv-star">✦</span><div class="sdiv-line"></div></div>
+    </div>
+    <div class="tgrid">
+      <div class="tc rv">
+        <div class="tq">"</div>
+        <div class="ttxt">The astrologer's guidance was remarkably accurate. Within a week of following the remedies, I noticed a significant positive shift in my career and personal relationships.</div>
+        <div class="tstars">★★★★★</div>
+        <div class="tauth">
+          <div class="tav" style="background:linear-gradient(135deg,#3a0870,#c44b8a)">N</div>
+          <div><div class="tname">Neha Trivedi</div><div class="tloc">Mumbai, Maharashtra</div></div>
+        </div>
+        <div class="tver">✅ Verified Purchase</div>
+      </div>
+      <div class="tc rv" style="transition-delay:.15s">
+        <div class="tq">"</div>
+        <div class="ttxt">I was skeptical at first, but the kundli matching was incredibly detailed. It predicted our compatibility patterns so accurately that my entire family was amazed by the results.</div>
+        <div class="tstars">★★★★★</div>
+        <div class="tauth">
+          <div class="tav" style="background:linear-gradient(135deg,#183060,#3b82f6)">R</div>
+          <div><div class="tname">Rahul Mehta</div><div class="tloc">New Delhi, NCR</div></div>
+        </div>
+        <div class="tver">✅ Verified Purchase</div>
+      </div>
+      <div class="tc rv" style="transition-delay:.3s">
+        <div class="tq">"</div>
+        <div class="ttxt">The tarot reading session was deeply insightful. Priya ji's intuitive guidance helped me make a pivotal business decision that turned out to be truly life-changing for me.</div>
+        <div class="tstars">★★★★★</div>
+        <div class="tauth">
+          <div class="tav" style="background:linear-gradient(135deg,#1e0050,#c9a84c)">P</div>
+          <div><div class="tname">Priya Agarwal</div><div class="tloc">Bangalore, Karnataka</div></div>
+        </div>
+        <div class="tver">✅ Verified Purchase</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section id="blog" style="background:var(--bg2)">
+  <div class="sec">
+    <div class="shead rv">
+      <span class="slabel">Cosmic Insights</span>
+      <h2 class="stitle">Latest from the <span class="gold">Stars</span></h2>
+      <div class="sdiv"><div class="sdiv-line"></div><span class="sdiv-star">✦</span><div class="sdiv-line"></div></div>
+    </div>
+    <div class="bgrid">
+      <div class="bcard rv">
+        <div class="bimg" style="background:linear-gradient(135deg,#1a0830,#3a1060)">🌙<div class="btag" style="background:rgba(124,60,175,.8);color:#fff">Horoscope</div></div>
+        <div class="binfo">
+          <div class="bdate">April 24, 2026</div>
+          <div class="btitle">Mercury Retrograde 2026: How It Will Affect Your Sign</div>
+          <div class="bexc">Mercury goes retrograde this month — here's what each zodiac sign can expect and how to navigate the cosmic chaos.</div>
+          <a class="bmore" href="#">Read More <span>→</span></a>
+        </div>
+      </div>
+      <div class="bcard rv" style="transition-delay:.12s">
+        <div class="bimg" style="background:linear-gradient(135deg,#2a1000,#603010)">🔮<div class="btag" style="background:rgba(201,168,76,.8);color:#1a0800">Vedic</div></div>
+        <div class="binfo">
+          <div class="bdate">April 20, 2026</div>
+          <div class="btitle">5 Powerful Vastu Tips to Attract Wealth &amp; Prosperity</div>
+          <div class="bexc">Ancient Vastu Shastra principles can transform your home into a magnet for abundance, health, and cosmic energy.</div>
+          <a class="bmore" href="#">Read More <span>→</span></a>
+        </div>
+      </div>
+      <div class="bcard rv" style="transition-delay:.24s">
+        <div class="bimg" style="background:linear-gradient(135deg,#0a1830,#1a3060)">⭐<div class="btag" style="background:rgba(59,91,191,.8);color:#fff">Numerology</div></div>
+        <div class="binfo">
+          <div class="bdate">April 15, 2026</div>
+          <div class="btitle">Your Lucky Numbers for 2026 Based on Your Birth Date</div>
+          <div class="bexc">Numerology reveals your most auspicious numbers for the year — discover which dates and digits align with your cosmic path.</div>
+          <a class="bmore" href="#">Read More <span>→</span></a>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:42px">
+      <button class="btn-o magnetic" style="margin:0 auto;display:inline-flex">View All Articles →</button>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-sec">
+  <div class="stats-bg"></div>
+  <div class="sgrid">
+    <div class="sstat rv"><div class="sstaticon">👥</div><div class="sstatnum" data-target="50" data-suffix="M+">0</div><div class="sstatlbl">Happy Users</div></div>
+    <div class="sstat rv" style="transition-delay:.15s"><div class="sstaticon">🔮</div><div class="sstatnum" data-target="10" data-suffix="K+">0</div><div class="sstatlbl">Expert Astrologers</div></div>
+    <div class="sstat rv" style="transition-delay:.3s"><div class="sstaticon">✨</div><div class="sstatnum" data-target="100" data-suffix="M+">0</div><div class="sstatlbl">Consultations Done</div></div>
+    <div class="sstat rv" style="transition-delay:.45s"><div class="sstaticon">⭐</div><div class="sstatnum" data-target="4.9" data-suffix="★" data-dec="1">0</div><div class="sstatlbl">Average Rating</div></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="fstars" id="fstars"></div>
+  <div class="fi">
+    <div>
+      <span class="flogo">✦ JyotishGuru</span>
+      <div class="fdesc">Your trusted companion on the cosmic journey. Empowering millions with ancient Vedic wisdom, modern AI-powered insights, and verified expert guidance.</div>
+      <div class="socials">
+        <a href="#" class="soci" aria-label="Facebook">f</a>
+        <a href="#" class="soci" aria-label="Instagram">ig</a>
+        <a href="#" class="soci" aria-label="Twitter">𝕏</a>
+        <a href="#" class="soci" aria-label="YouTube">▶</a>
+        <a href="#" class="soci" aria-label="Pinterest">P</a>
+      </div>
+    </div>
+    <div>
+      <div class="fh">Quick Links</div>
+      <div class="flinks">
+        <a href="#">Home</a><a href="#">Free Kundli</a>
+        <a href="#">Daily Horoscope</a><a href="#">Kundli Matching</a><a href="#">Blog</a>
+      </div>
+    </div>
+    <div>
+      <div class="fh">Our Services</div>
+      <div class="flinks">
+        <a href="#">Talk to Astrologer</a><a href="#">Tarot Reading</a>
+        <a href="#">Numerology</a><a href="#">Vastu Shastra</a><a href="#">AstroShop</a>
+      </div>
+    </div>
+    <div>
+      <div class="fh">Contact</div>
+      <div class="flinks">
+        <a href="#"><span class="__cf_email__" data-cfemail="d8b0bdb4b4b798b2a1b7acb1abb0bfadaaadf6b1b6">[email&#160;protected]</span></a>
+        <a href="#">1800-XXX-XXXX (Free)</a>
+        <a href="#">Mon–Sun · 6am–11pm IST</a>
+        <a href="#">New Delhi, India 110001</a>
+      </div>
+    </div>
+    <div>
+      <div class="fh">Stay Connected</div>
+      <p style="font-size:13px;color:var(--text3);margin-bottom:14px">Get weekly cosmic updates, free horoscopes and exclusive offers.</p>
+      <div class="nlinput">
+        <input class="nlemail" type="email" placeholder="Your email address">
+        <button class="nlbtn">→</button>
+      </div>
+    </div>
+  </div>
+  <div class="fbot">
+    <div class="fcopy">© 2026 JyotishGuru. All Rights Reserved.</div>
+    <div class="pays">
+      <span class="pay">Visa</span><span class="pay">Mastercard</span>
+      <span class="pay">UPI</span><span class="pay">RuPay</span><span class="pay">PayTM</span>
+    </div>
+    <div class="fcopy">
+      <a href="#" style="color:var(--text3)">Privacy</a> ·
+      <a href="#" style="color:var(--text3)">Terms</a> ·
+      <a href="#" style="color:var(--text3)">Cookies</a>
+    </div>
+  </div>
+</footer>
+
+<!-- FLOATING WIDGETS -->
+<div id="fcta">
+  <button class="wabtn" aria-label="WhatsApp">💬</button>
+  <button class="talkbtn magnetic">🔮 Talk Now</button>
+</div>
+<button id="btop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">🚀</button>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ── DATA ──────────────────────────────────────────────────────────────────
+const ZD=[
+  {s:'♈',n:'Aries',d:'Mar 21–Apr 19',m:'Bold new beginnings await. Trust your instincts.',l:4,c:5,h:4},
+  {s:'♉',n:'Taurus',d:'Apr 20–May 20',m:'Stability and abundance flow toward you.',l:5,c:3,h:4},
+  {s:'♊',n:'Gemini',d:'May 21–Jun 20',m:'Communication opens doors. Speak your truth.',l:3,c:5,h:3},
+  {s:'♋',n:'Cancer',d:'Jun 21–Jul 22',m:'Intuition is heightened. Your heart leads the way.',l:5,c:3,h:5},
+  {s:'♌',n:'Leo',d:'Jul 23–Aug 22',m:'The cosmos crowns you. Shine without apology.',l:4,c:5,h:4},
+  {s:'♍',n:'Virgo',d:'Aug 23–Sep 22',m:'Details align perfectly. Diligence pays off now.',l:3,c:5,h:5},
+  {s:'♎',n:'Libra',d:'Sep 23–Oct 22',m:'Harmony returns. Balance brings new blessings.',l:5,c:4,h:3},
+  {s:'♏',n:'Scorpio',d:'Oct 23–Nov 21',m:'Transformation unfolds. Embrace the unknown.',l:4,c:4,h:4},
+  {s:'♐',n:'Sagittarius',d:'Nov 22–Dec 21',m:'Adventure calls. Follow the stars to expansion.',l:4,c:5,h:5},
+  {s:'♑',n:'Capricorn',d:'Dec 22–Jan 19',m:'Ambition meets cosmic favor. Your peak is near.',l:3,c:5,h:4},
+  {s:'♒',n:'Aquarius',d:'Jan 20–Feb 18',m:'Innovation sparks brilliance. Share your vision.',l:4,c:4,h:4},
+  {s:'♓',n:'Pisces',d:'Feb 19–Mar 20',m:'Dreams carry messages. Listen with your soul.',l:5,c:3,h:5},
+];
+const AC=['#c9a84c','#8b5cf6','#ec4899','#3b82f6','#c9a84c','#8b5cf6','#ec4899','#3b82f6','#c9a84c','#8b5cf6','#ec4899','#3b82f6'];
+
+// ── LOADER ────────────────────────────────────────────────────────────────
+(function(){
+  const lwsvg=document.getElementById('lwsvg');
+  let h=`<circle cx="65" cy="65" r="58" stroke="rgba(201,168,76,.18)" stroke-width="1.5" fill="none"/>
+          <circle cx="65" cy="65" r="48" stroke="rgba(201,168,76,.4)" stroke-width="1.5" fill="none" stroke-dasharray="22 8"/>
+          <circle cx="65" cy="65" r="34" stroke="rgba(124,60,175,.35)" stroke-width="1" fill="none"/>`;
+  for(let i=0;i<12;i++){
+    const a=i*30*Math.PI/180;
+    const x1=65+48*Math.sin(a),y1=65-48*Math.cos(a),x2=65+58*Math.sin(a),y2=65-58*Math.cos(a);
+    const xs=65+41*Math.sin(a+15*Math.PI/180),ys=65-41*Math.cos(a+15*Math.PI/180);
+    h+=`<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="rgba(201,168,76,.25)" stroke-width="1"/>
+        <text x="${xs.toFixed(1)}" y="${(ys+4).toFixed(1)}" text-anchor="middle" fill="rgba(201,168,76,.6)" font-size="10">${ZD[i].s}</text>`;
+  }
+  h+=`<circle cx="65" cy="65" r="14" fill="rgba(124,60,175,.2)" stroke="rgba(201,168,76,.45)" stroke-width="1"/>
+      <text x="65" y="70" text-anchor="middle" fill="rgba(201,168,76,.9)" font-size="16">✦</text>`;
+  lwsvg.innerHTML=h;
+  const bar=document.getElementById('lbar');
+  let w=0;const ti=setInterval(()=>{w=Math.min(w+Math.random()*8,100);bar.style.width=w+'%';if(w>=100)clearInterval(ti);},30);
+  const ldr=document.getElementById('loader');
+  setTimeout(()=>{ldr.style.opacity='0';ldr.style.transition='opacity .5s';setTimeout(()=>{ldr.style.display='none';},550);},1400);
+})();
+
+// ── ZODIAC WHEEL SVG ──────────────────────────────────────────────────────
+(function(){
+  const svg=document.getElementById('zwsvg');if(!svg)return;
+  let h=svg.innerHTML;
+  const cx=250,cy=250,r1=222,r2=172,rs=196;
+  for(let i=0;i<12;i++){
+    const a=i*30*Math.PI/180;
+    const x1=cx+r2*Math.sin(a),y1=cy-r2*Math.cos(a),x2=cx+r1*Math.sin(a),y2=cy-r1*Math.cos(a);
+    const mid=i*30+15,am=mid*Math.PI/180;
+    const xs=cx+rs*Math.sin(am),ys=cy-rs*Math.cos(am);
+    h+=`<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="rgba(201,168,76,.22)" stroke-width="1"/>
+        <text x="${xs.toFixed(1)}" y="${(ys+6).toFixed(1)}" text-anchor="middle" fill="rgba(201,168,76,.72)" font-size="18" font-family="serif">${ZD[i].s}</text>`;
+    for(let t=0;t<4;t++){
+      const ta=(i*30+t*7.5)*Math.PI/180;
+      const tx1=cx+(r1-5)*Math.sin(ta),ty1=cy-(r1-5)*Math.cos(ta),tx2=cx+r1*Math.sin(ta),ty2=cy-r1*Math.cos(ta);
+      h+=`<line x1="${tx1.toFixed(1)}" y1="${ty1.toFixed(1)}" x2="${tx2.toFixed(1)}" y2="${ty2.toFixed(1)}" stroke="rgba(201,168,76,.28)" stroke-width="0.5"/>`;
+    }
+    const dr=147,da=(i*30+8)*Math.PI/180;
+    h+=`<circle cx="${(cx+dr*Math.sin(da)).toFixed(1)}" cy="${(cy-dr*Math.cos(da)).toFixed(1)}" r="2.2" fill="${AC[i]}" opacity=".65"/>`;
+  }
+  for(let i=0;i<12;i++){
+    const a1=(i*30+8)*Math.PI/180,a2=((i+1)*30+8)*Math.PI/180,dr=147;
+    h+=`<line x1="${(cx+dr*Math.sin(a1)).toFixed(1)}" y1="${(cy-dr*Math.cos(a1)).toFixed(1)}" x2="${(cx+dr*Math.sin(a2)).toFixed(1)}" y2="${(cy-dr*Math.cos(a2)).toFixed(1)}" stroke="rgba(201,168,76,.12)" stroke-width=".5"/>`;
+  }
+  for(let i=0;i<30;i++){
+    const ang=Math.random()*2*Math.PI,r=90+Math.random()*70;
+    h+=`<circle cx="${(cx+r*Math.cos(ang)).toFixed(1)}" cy="${(cy+r*Math.sin(ang)).toFixed(1)}" r="${(Math.random()*1.5+.4).toFixed(1)}" fill="white" opacity="${(Math.random()*.4+.15).toFixed(2)}"/>`;
+  }
+  svg.innerHTML=h;
+})();
+
+// ── STARFIELD ─────────────────────────────────────────────────────────────
+(function(){
+  const c=document.getElementById('sfx'),ctx=c.getContext('2d');
+  let W,H,stars=[],shots=[];
+  function rsz(){W=c.width=c.offsetWidth;H=c.height=c.offsetHeight}
+  rsz();window.addEventListener('resize',rsz);
+  for(let i=0;i<260;i++)stars.push({x:Math.random()*2200,y:Math.random()*2000,r:Math.random()*1.8+.2,a:Math.random(),sp:Math.random()*.4+.05,ts:Math.random()*.025+.005,td:Math.random()>.5?1:-1});
+  function spawn(){shots.push({x:Math.random()*W*.5,y:Math.random()*H*.25,l:Math.random()*130+60,sp:Math.random()*7+5,a:1})}
+  spawn();setInterval(spawn,5e3+Math.random()*3e3);
+  let sy=0;window.addEventListener('scroll',()=>{sy=window.scrollY},{passive:true});
+  function draw(ts){
+    ctx.clearRect(0,0,W,H);
+    const po=sy*.25;
+    stars.forEach(s=>{
+      s.a+=s.ts*s.td;if(s.a>1||s.a<.08)s.td*=-1;
+      const sx=((s.x+ts*s.sp*.008)%W+W)%W,sy2=((s.y-po*s.sp*.2)%H+H)%H;
+      ctx.beginPath();ctx.arc(sx,sy2,s.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(255,255,255,${s.a*.75})`;ctx.fill();
+    });
+    shots.forEach((sh,i)=>{
+      sh.x+=sh.sp;sh.y+=sh.sp*.55;sh.a-=.018;
+      const g=ctx.createLinearGradient(sh.x,sh.y,sh.x-sh.l,sh.y-sh.l*.55);
+      g.addColorStop(0,`rgba(255,240,180,${sh.a})`);g.addColorStop(1,'rgba(255,240,180,0)');
+      ctx.beginPath();ctx.moveTo(sh.x,sh.y);ctx.lineTo(sh.x-sh.l,sh.y-sh.l*.55);
+      ctx.strokeStyle=g;ctx.lineWidth=1.8;ctx.stroke();
+      if(sh.a<=0)shots.splice(i,1);
+    });
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+// ── CURSOR ────────────────────────────────────────────────────────────────
+(function(){
+  const cur=document.getElementById('cursor');
+  let mx=-100,my=-100,cx2=-100,cy2=-100;
+  document.addEventListener('mousemove',e=>{
+    mx=e.clientX;my=e.clientY;
+    if(Math.random()>.55){
+      const p=document.createElement('div');
+      p.className='cpar';
+      const sz=Math.random()*5+2,hue=36+Math.random()*20;
+      const px=(Math.random()-0.5)*60,py=-(Math.random()*50+20);
+      p.style.cssText=`left:${mx}px;top:${my}px;width:${sz}px;height:${sz}px;--px:${px}px;--py:${py}px;background:hsl(${hue},80%,65%);opacity:${Math.random()*.7+.3}`;
+      document.body.appendChild(p);
+      setTimeout(()=>p.remove(),800);
+    }
+  });
+  document.addEventListener('click',e=>{
+    const r=document.createElement('div');
+    r.className='ripple-el';
+    r.style.cssText=`left:${e.clientX}px;top:${e.clientY}px`;
+    document.body.appendChild(r);
+    setTimeout(()=>r.remove(),1200);
+  });
+  document.querySelectorAll('a,button,.scard,.zc,.acard,.cati,.magnetic,.abstore').forEach(el=>{
+    el.addEventListener('mouseenter',()=>cur.classList.add('big'));
+    el.addEventListener('mouseleave',()=>cur.classList.remove('big'));
+  });
+  function anim(){cx2+=(mx-cx2)*.13;cy2+=(my-cy2)*.13;cur.style.left=cx2+'px';cur.style.top=cy2+'px';requestAnimationFrame(anim)}
+  anim();
+})();
+
+// ── MAGNETIC ─────────────────────────────────────────────────────────────
+document.querySelectorAll('.magnetic').forEach(el=>{
+  el.addEventListener('mousemove',e=>{
+    const r=el.getBoundingClientRect(),dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2),dist=Math.sqrt(dx*dx+dy*dy);
+    if(dist<100){const f=(1-dist/100)*12;el.style.transform=`translate(${dx*f/dist}px,${dy*f/dist}px)`}
+  });
+  el.addEventListener('mouseleave',()=>{el.style.transform=''});
+});
+
+// ── NAV / PROGRESS / BACK-TOP ────────────────────────────────────────────
+const nav=document.getElementById('nav'),pb=document.getElementById('pbar'),bt=document.getElementById('btop');
+window.addEventListener('scroll',()=>{
+  const st=window.scrollY,dh=document.documentElement.scrollHeight-window.innerHeight;
+  nav.classList.toggle('scrolled',st>50);
+  pb.style.width=(st/dh*100)+'%';
+  bt.classList.toggle('show',st>500);
+  // BG subtle shift
+  if(st/dh>.5){document.body.style.background=`rgb(${Math.round(7+st/dh*8)},${Math.round(5+st/dh*3)},${Math.round(15+st/dh*12)})`}
+  else{document.body.style.background='var(--bg)'}
+},{passive:true});
+
+// ── OFFER BANNER ─────────────────────────────────────────────────────────
+function closeBanner(){const b=document.getElementById('obanner');b.style.transition='max-height .4s,opacity .4s,padding .4s';b.style.maxHeight='0';b.style.opacity='0';b.style.padding='0 20px';setTimeout(()=>b.remove(),400)}
+
+// ── SCROLL REVEAL ─────────────────────────────────────────────────────────
+function revealEl(el){
+  el.style.transition='opacity .7s ease, transform .7s ease';
+  el.style.opacity='1';
+  el.style.transform='none';
+  el.classList.add('vis');
+}
+const io=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){revealEl(e.target);if(e.target.classList.contains('sconn')){const p=e.target.querySelector('path');if(p){p.style.strokeDashoffset='0';p.style.transition='stroke-dashoffset 1.2s ease'}}}});
+},{threshold:.08,rootMargin:'0px 0px -20px 0px'});
+document.querySelectorAll('.rv,.sconn').forEach(el=>io.observe(el));
+// Fallback: force reveal after 1s in case IntersectionObserver doesn't fire (e.g. iframe)
+setTimeout(()=>{
+  document.querySelectorAll('.rv,.sconn').forEach(el=>{
+    revealEl(el);
+    const p=el.querySelector('path');
+    if(p){p.style.strokeDashoffset='0'}
+  });
+}, 1000);
+
+// App feature stagger
+const afIO=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){const els=e.target.querySelectorAll('.af');els.forEach((el,i)=>{setTimeout(()=>el.classList.add('vis'),i*180)})}});
+},{threshold:.3});
+const appFeat=document.querySelector('.app-feat');
+if(appFeat)afIO.observe(appFeat);
+// Fallback
+setTimeout(()=>document.querySelectorAll('.af').forEach((el,i)=>setTimeout(()=>el.classList.add('vis'),i*150)),1200);
+
+// ── COUNTERS ─────────────────────────────────────────────────────────────
+const cIO=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting&&!e.target.dataset.counted){
+      e.target.dataset.counted='1';
+      const tgt=parseFloat(e.target.dataset.target),sfx=e.target.dataset.suffix||'',dec=parseInt(e.target.dataset.dec||0);
+      const dur=1900,start=performance.now();
+      function up(now){const p=Math.min((now-start)/dur,1),eased=1-Math.pow(1-p,3),v=tgt*eased;
+        e.target.textContent=(dec?v.toFixed(dec):Math.floor(v))+sfx;if(p<1)requestAnimationFrame(up)}
+      requestAnimationFrame(up);
+    }
+  });
+},{threshold:.5});
+document.querySelectorAll('[data-target]').forEach(el=>cIO.observe(el));
+
+// ── ZODIAC CAROUSEL ───────────────────────────────────────────────────────
+(function(){
+  const trak=document.getElementById('ztrak'),dotsW=document.getElementById('zdots');
+  let cur=0;
+  const vis=()=>window.innerWidth<768?3:6;
+  ZD.forEach((z,i)=>{
+    const card=document.createElement('div');
+    card.className='zc'+(i===0?' zact':'');
+    card.innerHTML=`<div class="zci">
+      <div class="zface front">
+        <div class="zsym">${z.s}</div>
+        <div class="zname">${z.n}</div>
+        <div class="zdates">${z.d}</div>
+      </div>
+      <div class="zface back">
+        <div class="zbt">Today's Insight</div>
+        <div class="zbtext">${z.m}</div>
+        <div style="font-size:9px;color:var(--text3);margin-top:8px">Love · Career · Health</div>
+        <div class="zbars">
+          <div class="zbar" style="background:var(--pink);width:${z.l/5*100}%;flex:1"></div>
+          <div class="zbar" style="background:var(--blue);width:${z.c/5*100}%;flex:1"></div>
+          <div class="zbar" style="background:#4ade80;width:${z.h/5*100}%;flex:1"></div>
+        </div>
+      </div>
+    </div>`;
+    card.onclick=()=>{document.querySelectorAll('.zc').forEach(c=>c.classList.remove('zact'));card.classList.add('zact')};
+    trak.appendChild(card);
+  });
+  const nd=Math.ceil(12/vis());
+  for(let i=0;i<nd;i++){const d=document.createElement('button');d.className='cdot'+(i===0?' ca':'');d.onclick=()=>go(i);dotsW.appendChild(d)}
+  function go(page){
+    cur=(page+nd)%nd;
+    const cw=trak.querySelector('.zc').offsetWidth+20;
+    trak.style.transform=`translateX(-${cur*vis()*cw}px)`;
+    trak.style.transition='transform .55s cubic-bezier(.4,0,.2,1)';
+    dotsW.querySelectorAll('.cdot').forEach((d,i)=>d.classList.toggle('ca',i===cur));
+  }
+  document.getElementById('zprev').onclick=()=>go(cur-1);
+  document.getElementById('znext').onclick=()=>go(cur+1);
+  let auto=setInterval(()=>go(cur+1),3800);
+  trak.addEventListener('mouseenter',()=>clearInterval(auto));
+  trak.addEventListener('mouseleave',()=>{auto=setInterval(()=>go(cur+1),3800)});
+})();
+
+// ── FOOTER STARS ──────────────────────────────────────────────────────────
+(function(){
+  const w=document.getElementById('fstars');if(!w)return;
+  for(let i=0;i<70;i++){const s=document.createElement('div');s.style.cssText=`position:absolute;width:${Math.random()*2+.5}px;height:${Math.random()*2+.5}px;border-radius:50%;background:rgba(255,255,255,${Math.random()*.25+.05});top:${Math.random()*100}%;left:${Math.random()*100}%;animation:twinkle ${Math.random()*3+2}s ease-in-out infinite ${Math.random()*3}s`;w.appendChild(s)}
+  // Footer shooting star
+  function fshoot(){const s=document.createElement('div');s.style.cssText=`position:absolute;top:${Math.random()*40}%;left:0;width:80px;height:1.5px;background:linear-gradient(90deg,rgba(201,168,76,.8),transparent);animation:shoot 1.2s ease-out forwards`;w.appendChild(s);setTimeout(()=>s.remove(),1200)}
+  fshoot();setInterval(fshoot,10000);
+})();
+
+// ── MOBILE MENU ───────────────────────────────────────────────────────────
+document.getElementById('hbg').addEventListener('click',()=>{
+  const l=document.querySelector('.nlinks');
+  if(!l)return;
+  const open=l.style.display==='flex';
+  l.style.cssText=open?'display:none':
+    'display:flex;flex-direction:column;position:absolute;top:62px;right:20px;background:rgba(7,5,15,.97);padding:20px 24px;border:1px solid rgba(201,168,76,.22);border-radius:10px;gap:16px;z-index:100;backdrop-filter:blur(16px)';
+});
+
+// hero content always visible — no animation dependency
+
+// ── SCROLL TO SECTION ─────────────────────────────────────────────────────
+function scrollTo2(id){const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'})}
+
+// ── EXTRA CURSOR HOVER BINDINGS (dynamic elements) ────────────────────────
+setTimeout(()=>{
+  const cur=document.getElementById('cursor');
+  document.querySelectorAll('.zc,.acard,.bcard,.tc,.cati').forEach(el=>{
+    el.addEventListener('mouseenter',()=>cur.classList.add('big'));
+    el.addEventListener('mouseleave',()=>cur.classList.remove('big'));
+  });
+},500);
+</script>
+</body>
+</html>
